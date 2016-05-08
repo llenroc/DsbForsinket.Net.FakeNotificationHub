@@ -1,0 +1,57 @@
+﻿@model DsbForsinket.Net.FakeNotificationHub.Models.Registration
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Registration</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Station)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Station)
+            @Stations.NameForId(Model.Station)
+        </dd>
+    </dl>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Tag
+        </th>
+        <th>
+            Time
+        </th>
+        <th>
+            Content
+        </th>
+    </tr>
+
+    @foreach (var n in Model.Notifications)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => n.Tag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => n.Timestamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => n.Content)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Back to List", "Index") |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+</p>

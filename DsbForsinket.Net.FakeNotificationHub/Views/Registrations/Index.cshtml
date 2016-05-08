@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DsbForsinket.Net.FakeNotificationHub.Models.Registration>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create") |
+    @Html.ActionLink("DeleteAll", "DeleteAll")
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Station)
+        </th>
+        <th>
+            Number Of Notifications
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Station)
+                @Stations.NameForId(item.Station)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notifications.Count)
+                <p>
+                    @foreach (var notification in item.Notifications.OrderByDescending(n => n.Timestamp).Take(10))
+                    {
+                        @notification.Timestamp.ToString("HH:mm") 
+                        <text>|</text>
+                    }
+                </p>
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
