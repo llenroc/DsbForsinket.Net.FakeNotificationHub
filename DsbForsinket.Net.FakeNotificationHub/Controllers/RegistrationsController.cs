@@ -29,6 +29,13 @@ namespace DsbForsinket.Net.FakeNotificationHub.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<ActionResult> DeleteAllNotifications()
+        {
+            db.Notifications.RemoveRange(await db.Notifications.ToListAsync());
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
         // GET: Registrations/Details/5
         public async Task<ActionResult> Details(int? id)
         {
