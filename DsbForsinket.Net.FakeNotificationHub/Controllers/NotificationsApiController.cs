@@ -22,6 +22,9 @@ namespace DsbForsinket.Net.FakeNotificationHub.Controllers
         [ResponseType(typeof(Notification))]
         public async Task<string> PostNotification(NotificationViewModel notification)
         {
+            // make the call slower
+            await Task.Delay(TimeSpan.FromMilliseconds(new Random().Next(5000)));
+
             var time = notification.Tag.Split('-')[1];
             var station = notification.Tag.Split('-')[0];
 
