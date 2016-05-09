@@ -23,13 +23,13 @@ namespace DsbForsinket.Net.FakeNotificationHub.Controllers
         public async Task<string> PostNotification(NotificationViewModel notification)
         {
             // make the call slower
-            await Task.Delay(TimeSpan.FromMilliseconds(new Random().Next(5000)));
+            await Task.Delay(TimeSpan.FromMilliseconds(new Random().Next(10000) + 10000));
 
             var time = notification.Tag.Split('-')[1];
             var station = notification.Tag.Split('-')[0];
 
             var registrations = await db.Registrations.Where(r => r.Station == station).ToListAsync();
-            foreach(var r in registrations)
+            foreach (var r in registrations)
             {
                 r.Notifications.Add(new Notification
                 {
