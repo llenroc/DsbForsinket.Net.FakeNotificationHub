@@ -30,12 +30,16 @@
             Time
         </th>
         <th>
-            Content
+            Decoded Content
         </th>
     </tr>
 
-    @foreach (var n in Model.Notifications)
+    @foreach (var n in Model.Notifications.OrderByDescending(n => n.Timestamp))
     {
+        var json = Json.Decode(n.Content);
+        var count = int.Parse(json.data.delayedCount);
+        count = count > 5 ? 5 : count;
+
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => n.Tag)
@@ -44,7 +48,15 @@
                 @Html.DisplayFor(modelItem => n.Timestamp)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => n.Content)
+                @for (int i = 0; i < count; i++)
+                {
+                    <p>
+                        @Html.Raw(json.data["departureName" + i])
+                        <del>@json.data["departureTime" + i]</del>
+                        @json.data["departureNewTime" + i]
+                        @json.data["departureCancelled" + i]
+                    </p>
+                }
             </td>
         </tr>
     }
