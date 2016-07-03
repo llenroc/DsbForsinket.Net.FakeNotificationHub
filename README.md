@@ -1,7 +1,7 @@
 A small webapp I used to test if the push notifications sent by my [public transportation notification service](https://github.com/omarcin/dsb-forsinket-akka) are correct without actually subscribing multiple Android devices to the notifications.
 
-![Main page](meta/screenshot-list.png?raw=true "Main page")
-![Details page](meta/screenshot-details.png?raw=true "Details page")
+![Main page](meta/screenshot-list.PNG?raw=true "Main page")
+![Details page](meta/screenshot-details.PNG?raw=true "Details page")
 
 
 The MIT License (MIT)
